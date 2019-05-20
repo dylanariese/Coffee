@@ -1,7 +1,41 @@
 <ActionBar class="action-bar">
-    <Label class="action-bar-title" text="Home"></Label>
+    <Label class="action-bar-title" text="Overzicht"></Label>
 </ActionBar>
 
-<GridLayout class="page">
-    <!-- Add your page content here -->
+<GridLayout row="2" width="100%" backgroundColor="white">
+    <ListView #listview [items]="items" separatorColor="transparent">
+        <ng-template let-item="item">
+            <StackLayout class="main">
+                <StackLayout class="content">
+                    <Image stretch="aspectFill" class="card-img" [src]="item.src"></Image>
+
+                    <GridLayout width="100%" columns="auto,*" rows="auto,auto" class="" verticalAlignment="center">
+                        <Label row="0" col="1" class="item-name" textwrap="true" verticalAlignment="bottom"
+                            horizontalAlignment="left" [text]="item.name"></Label>
+                        <GridLayout row="1" col="1" rows="auto" columns="auto,auto,auto">
+                            <Label row="0" col="0" class="item-category" textwrap="true" verticalAlignment="top"
+                                horizontalAlignment="left" [text]="item.description"></Label>
+                        </GridLayout>
+                    </GridLayout>
+
+                    <StackLayout width="100%" marginTop="5" class="line"></StackLayout>
+
+                    <GridLayout columns="auto,*,auto,auto" rows="auto">
+                        <GridLayout col="2" rows="auto" columns="auto,auto" (tap)="toggleAccept(item, false)"
+                            marginRight="15">
+                            <Label col="0" row="0" #favorite class="like-icon fa default"
+                                [text]="item.isFavorite ? '&#xf004;':'&#xf08a;'"></Label>
+                            <Label col="1" row="0" class="layout" text="Weigeren"></Label>
+                        </GridLayout>
+                        <StackLayout col="3" orientation="horizontal" (tap)="toggleAccept(item, true)">
+                            <Label ref="" class="like-icon layout fa" text="&#xf045;"></Label>
+                            <Label class="layout" text="Accepteren"></Label>
+                        </StackLayout>
+                    </GridLayout>
+                </StackLayout>
+
+                <StackLayout width="100%" class="lineBreak"></StackLayout>
+            </StackLayout>
+        </ng-template>
+    </ListView>
 </GridLayout>

@@ -3,6 +3,7 @@ import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+import { DataService } from "./data/data";
 
 @NgModule({
     bootstrap: [
@@ -12,6 +13,7 @@ import { AppComponent } from "./app.component";
         NativeScriptModule,
         AppRoutingModule
     ],
+    providers: [DataService],
     declarations: [
         AppComponent
     ],
