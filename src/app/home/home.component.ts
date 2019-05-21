@@ -29,8 +29,8 @@ export class HomeComponent implements OnInit {
         this.routerExtensions.navigate(["/login"], { clearHistory: true });
     }
 
-    onPullToRefreshInitiated = (args: ListViewEventData) =>
-        new Promise((resolve) => resolve(this.dataService.getItems())).then((result: Array<Item>) => {
+    onPullToRefreshInitiated = (args: ListViewEventData) => new Promise((resolve) =>
+        resolve(this.dataService.getItems())).then((result: Array<Item>) => {
             this.items = result;
 
             const listView = args.object;
