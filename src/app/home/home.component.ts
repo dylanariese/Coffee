@@ -3,6 +3,7 @@ import { RouterExtensions } from "nativescript-angular/router";
 
 import { Item } from "../data/item.model";
 import { DataService } from "../data/data";
+import { ListViewEventData } from "nativescript-ui-listview";
 
 @Component({
     selector: "Home",
@@ -12,9 +13,7 @@ import { DataService } from "../data/data";
 export class HomeComponent implements OnInit {
     items: Array<Item>;
 
-    constructor(private dataService: DataService) {
-
-    }
+    constructor(private routerExtensions: RouterExtensions, private dataService: DataService) { }
 
     ngOnInit(): void {
         this.items = this.dataService.getItems();
@@ -24,24 +23,21 @@ export class HomeComponent implements OnInit {
         console.log('accepted: ', accept);
     }
 
-    categoryIcon(category: string) {
-        console.log('categoryItem called!');
+    logout() {
+        //todo: call logout service
 
-        switch (category) {
-            case "Burger":
-                console.log('called!');
-                return String.fromCharCode(0xf0f5); //"fa-cutlery";
-            case "Beer":
-                console.log('called!');
-                return String.fromCharCode(0xf0fc); //"fa-beer";
-            case "Pancake":
-                console.log('called!');
-                return String.fromCharCode(0xf0f4); //"fa-coffee";
-            case "Cake":
-                console.log('called!');
-                return String.fromCharCode(0xf1fd); //"fa-birthday-cake";
-            default:
-                return String.fromCharCode(0xf06d); //"fa-fire";
-        }
+        this.routerExtensions.navigate(["/login"], { clearHistory: true });
+    }
+
+    notifyPullToRefreshFinished() {
+        console.log('finished!');
+    }
+
+    onPullToRefreshInitiated(args: ListViewEventData) {
+        setTimeout(function () {
+            const listView = args.object;
+
+            listView.notifyPullToRefreshFinished();
+        }, 1000);
     }
 }

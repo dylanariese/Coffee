@@ -4,6 +4,7 @@ import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { DataService } from "./data/data";
+import { NativeScriptFormsModule } from "nativescript-angular/forms";
 
 @NgModule({
     bootstrap: [
@@ -11,7 +12,8 @@ import { DataService } from "./data/data";
     ],
     imports: [
         NativeScriptModule,
-        AppRoutingModule
+        AppRoutingModule,        
+        NativeScriptFormsModule,        
     ],
     providers: [DataService],
     declarations: [
