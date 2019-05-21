@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
+import { ListViewEventData } from "nativescript-ui-listview";
 
 import { Item } from "../data/item.model";
 import { DataService } from "../data/data";
-import { ListViewEventData } from "nativescript-ui-listview";
 
 @Component({
     selector: "Home",
@@ -29,15 +29,12 @@ export class HomeComponent implements OnInit {
         this.routerExtensions.navigate(["/login"], { clearHistory: true });
     }
 
-    notifyPullToRefreshFinished() {
-        console.log('finished!');
-    }
+    onPullToRefreshInitiated = (args: ListViewEventData) =>
+        new Promise((resolve) => resolve(this.dataService.getItems())).then((result: Array<Item>) => {
+            this.items = result;
 
-    onPullToRefreshInitiated(args: ListViewEventData) {
-        setTimeout(function () {
             const listView = args.object;
 
-            listView.notifyPullToRefreshFinished();
-        }, 1000);
-    }
+            listView.notifyPullToRefreshFinished(true);
+        }).catch(error => console.log(error));
 }
