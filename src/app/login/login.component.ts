@@ -54,6 +54,7 @@ export class LoginComponent {
         //         this.processing = false;
         //         this.alert("Unfortunately we could not find your account.");
         //     });
+        this.routerExtensions.navigate(["/home"], { clearHistory: true });
     }
 
     register() {
