@@ -5,6 +5,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { DataService } from "./data/data";
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
+import { LoginComponent } from "./login/login.component";
 
 @NgModule({
     bootstrap: [
@@ -12,12 +13,13 @@ import { NativeScriptFormsModule } from "nativescript-angular/forms";
     ],
     imports: [
         NativeScriptModule,
-        AppRoutingModule,        
-        NativeScriptFormsModule,        
+        AppRoutingModule,
+        NativeScriptFormsModule,
     ],
     providers: [DataService],
     declarations: [
-        AppComponent
+        AppComponent,
+        LoginComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

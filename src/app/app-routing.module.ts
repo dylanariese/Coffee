@@ -1,9 +1,12 @@
 import { NgModule } from "@angular/core";
 import { Routes } from "@angular/router";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
+import { LoginComponent } from "./login/login.component";
+import { BackendService } from "./shared/backend.service";
 
 const routes: Routes = [
-    { path: "", redirectTo: "/home", pathMatch: "full" },
+    { path: "", redirectTo: !BackendService.isUserLoggedIn() ? "/home" : "/login", pathMatch: "full" },
+    { path: "login", component: LoginComponent },
     { path: "home", loadChildren: "~/app/home/home.module#HomeModule" }
 ];
 
