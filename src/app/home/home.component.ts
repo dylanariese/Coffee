@@ -31,9 +31,9 @@ export class HomeComponent implements OnInit {
 
     onPullToRefreshInitiated = (args: ListViewEventData) => new Promise((resolve) =>
         resolve(this.dataService.getItems())).then((result: Array<Item>) => {
-            this.items = result;
-
             const listView = args.object;
+
+            this.items = result;
 
             listView.notifyPullToRefreshFinished(true);
         }).catch(error => console.log(error));
