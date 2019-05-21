@@ -30,4 +30,41 @@ export class DataService {
             description: "Joffrey Schoonheijm - 27 Mei @ 13:45",
         }];
     }
+
+    getImages(): Array<string> {
+        const images = [
+            "~/images/1.jpg",
+            "~/images/inline_image_preview.jpg",
+            "~/images/coffee-geneva-switzerland.jpg",
+            "~/images/2822746_stock-photo-coffee.jpg",
+            "~/images/images.jpg",
+            "~/images/inline_image_preview.jpg",
+            "~/images/istockphoto-504984010-612x612.jpg",
+            "~/images/istockphoto-856004690-612x612.jpg",
+            "~/images/Kopitoraja-323.jpg",
+            "~/images/preview-1.jpg",
+            "~/images/preview-2.jpg",
+            "~/images/stock-photo-close-up-of-espresso-pouring-from-coffee-machine-professional-coffee-brewing-278456510.jpg",            
+        ];
+
+        return images;
+    }
+
+    getNames(): Array<string> {
+        const images = [
+            "Dylan Ariese",
+            "Joffrey Schoonheijn",
+            "Roland Derks",
+            "Joris Jolles",
+            "Henk op 't Einde",
+            "Stefan Koldewijn",
+            "Manon Zorge",
+            "Rudi Boer",
+            "Bas Goedhart",
+            "Saskia Brand",
+            "Gert de Best"
+        ];
+
+        return images;
+    }
 }

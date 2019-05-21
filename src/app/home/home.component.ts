@@ -29,6 +29,31 @@ export class HomeComponent implements OnInit {
         this.routerExtensions.navigate(["/login"], { clearHistory: true });
     }
 
+    add() {
+        const urls = this.dataService.getImages();
+        const names = this.dataService.getNames();
+        const image = urls[Math.floor(Math.random() * urls.length)];
+        const name = names[Math.floor(Math.random() * names.length)];
+        const previous = this.items[this.items.length - 1];
+        const next = ++previous.id;
+
+        const dat = this.randomDate(new Date(2012, 0, 1), new Date());
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
+            'September', 'October', 'November', 'December'];
+
+        let item = <Item>{
+            id: next,
+            name: `Coffee afspraak ${next}`,
+            src: image,
+            description: `${name} - ${dat.getDay() + 1} ${months[dat.getMonth()]} @ ${dat.getHours()}:${dat.getMinutes()}`,
+        };
+
+        this.items.push(item);
+    }
+
+    randomDate = (start: any, end: any) =>
+        new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+
     onPullToRefreshInitiated = (args: ListViewEventData) => new Promise((resolve) =>
         resolve(this.dataService.getItems())).then((result: Array<Item>) => {
             const listView = args.object;
