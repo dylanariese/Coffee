@@ -5,9 +5,9 @@ import { LoginComponent } from "./login/login.component";
 import { BackendService } from "./shared/backend.service";
 
 const routes: Routes = [
-    { path: "", redirectTo: !BackendService.isUserLoggedIn() ? "/home" : "/login", pathMatch: "full" },
+    { path: "", redirectTo: BackendService.isUserLoggedIn() ? "/home" : "/login", pathMatch: "full" },
     { path: "login", component: LoginComponent },
-    { path: "home", loadChildren: "~/app/home/home.module#HomeModule" }
+    { path: "home", loadChildren: "./home/home.module#HomeModule" }
 ];
 
 @NgModule({

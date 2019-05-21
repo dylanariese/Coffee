@@ -4,7 +4,7 @@ import { Page } from "tns-core-modules/ui/page";
 import { RouterExtensions } from "nativescript-angular/router";
 
 import { User } from "../shared/user.model";
-import { UserService } from "../shared/user.service";
+
 
 @Component({
     selector: "app-login",
@@ -19,7 +19,7 @@ export class LoginComponent {
     @ViewChild("password") password: ElementRef;
     @ViewChild("confirmPassword") confirmPassword: ElementRef;
 
-    constructor(private page: Page, private userService: UserService, private routerExtensions: RouterExtensions) {
+    constructor(private page: Page, private routerExtensions: RouterExtensions) {
         this.page.actionBarHidden = true;
         this.user = new User();
         this.user.email = "user@nativescript.org";
@@ -45,52 +45,52 @@ export class LoginComponent {
     }
 
     login() {
-        this.userService.login(this.user)
-            .then(() => {
-                this.processing = false;
-                this.routerExtensions.navigate(["/home"], { clearHistory: true });
-            })
-            .catch(() => {
-                this.processing = false;
-                this.alert("Unfortunately we could not find your account.");
-            });
+        // this.userService.login(this.user)
+        //     .then(() => {
+        //         this.processing = false;
+        //         this.routerExtensions.navigate(["/home"], { clearHistory: true });
+        //     })
+        //     .catch(() => {
+        //         this.processing = false;
+        //         this.alert("Unfortunately we could not find your account.");
+        //     });
     }
 
     register() {
-        if (this.user.password != this.user.confirmPassword) {
-            this.alert("Your passwords do not match.");
-            return;
-        }
-        this.userService.register(this.user)
-            .then(() => {
-                this.processing = false;
-                this.alert("Your account was successfully created.");
-                this.isLoggingIn = true;
-            })
-            .catch(() => {
-                this.processing = false;
-                this.alert("Unfortunately we were unable to create your account.");
-            });
+        // if (this.user.password != this.user.confirmPassword) {
+        //     this.alert("Your passwords do not match.");
+        //     return;
+        // }
+        // this.userService.register(this.user)
+        //     .then(() => {
+        //         this.processing = false;
+        //         this.alert("Your account was successfully created.");
+        //         this.isLoggingIn = true;
+        //     })
+        //     .catch(() => {
+        //         this.processing = false;
+        //         this.alert("Unfortunately we were unable to create your account.");
+        //     });
     }
 
     forgotPassword() {
-        prompt({
-            title: "Forgot Password",
-            message: "Enter the email address you used to register for APP NAME to reset your password.",
-            inputType: "email",
-            defaultText: "",
-            okButtonText: "Ok",
-            cancelButtonText: "Cancel"
-        }).then((data) => {
-            if (data.result) {
-                this.userService.resetPassword(data.text.trim())
-                    .then(() => {
-                        this.alert("Your password was successfully reset. Please check your email for instructions on choosing a new password.");
-                    }).catch(() => {
-                        this.alert("Unfortunately, an error occurred resetting your password.");
-                    });
-            }
-        });
+        // prompt({
+        //     title: "Forgot Password",
+        //     message: "Enter the email address you used to register for APP NAME to reset your password.",
+        //     inputType: "email",
+        //     defaultText: "",
+        //     okButtonText: "Ok",
+        //     cancelButtonText: "Cancel"
+        // }).then((data) => {
+        //     if (data.result) {
+        //         this.userService.resetPassword(data.text.trim())
+        //             .then(() => {
+        //                 this.alert("Your password was successfully reset. Please check your email for instructions on choosing a new password.");
+        //             }).catch(() => {
+        //                 this.alert("Unfortunately, an error occurred resetting your password.");
+        //             });
+        //     }
+        // });
     }
 
     focusPassword() {
