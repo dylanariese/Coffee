@@ -45,15 +45,15 @@ export class LoginComponent {
     }
 
     login() {
-        this.userService.login(this.user)
-            .then(() => {
+        this.userService.logout().then(() => {
+            this.userService.login(this.user).then(() => {
                 this.processing = false;
                 this.routerExtensions.navigate(["/home"], { clearHistory: true });
-            })
-            .catch(() => {
+            }).catch(() => {
                 this.processing = false;
                 this.alert("Unfortunately we could not find your account.");
             });
+        });
     }
 
     register() {

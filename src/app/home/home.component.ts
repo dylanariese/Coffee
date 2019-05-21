@@ -4,6 +4,7 @@ import { ListViewEventData } from "nativescript-ui-listview";
 
 import { Item } from "../data/item.model";
 import { DataService } from "../data/data";
+import { UserService } from "../shared/user.service";
 
 @Component({
     selector: "Home",
@@ -13,7 +14,11 @@ import { DataService } from "../data/data";
 export class HomeComponent implements OnInit {
     items: Array<Item>;
 
-    constructor(private routerExtensions: RouterExtensions, private dataService: DataService) { }
+    constructor(
+        private routerExtensions: RouterExtensions,
+        private dataService: DataService,
+        private userService: UserService
+    ) { }
 
     ngOnInit(): void {
         this.items = this.dataService.getItems();
@@ -24,7 +29,7 @@ export class HomeComponent implements OnInit {
     }
 
     logout() {
-        //todo: call logout service
+        this.userService.logout();
 
         this.routerExtensions.navigate(["/login"], { clearHistory: true });
     }
