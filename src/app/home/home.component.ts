@@ -13,10 +13,12 @@ import { ios } from "tns-core-modules/application/application";
     moduleId: module.id,
     templateUrl: "./home.component.html"
 
+
 })
 export class HomeComponent implements OnInit {
     items: Array<Item>;
     userName: string = "hallo";
+    _ios;
 
     @ViewChild("listView") listViewRef: RadListViewComponent;
 
@@ -31,6 +33,7 @@ export class HomeComponent implements OnInit {
         this.items = this.dataService.getItems();
         var user = this.userService.getUser()
         this.userName = user ? this.userService.getUser().name : "Anoniem";
+        this._ios = ios;
         console.log('user ', this.userName);
     }
 
