@@ -4,6 +4,7 @@ import { Page } from "tns-core-modules/ui/page";
 import { RouterExtensions } from "nativescript-angular/router";
 
 import { User } from "../shared/user.model";
+import { device } from "tns-core-modules/platform/platform";
 
 
 @Component({
@@ -16,14 +17,14 @@ export class LoginComponent {
     isLoggingIn = true;
     user: User;
     processing = false;
-    @ViewChild("password") password: ElementRef;
+    @ViewChild("name") name: ElementRef;
     @ViewChild("confirmPassword") confirmPassword: ElementRef;
 
     constructor(private page: Page, private routerExtensions: RouterExtensions) {
         this.page.actionBarHidden = true;
         this.user = new User();
-        this.user.email = "user@nativescript.org";
-        this.user.password = "password";
+        this.user.name  = "Jan Jansen";
+        this.user.uuid = device.uuid;
     }
 
     toggleForm() {
@@ -31,8 +32,8 @@ export class LoginComponent {
     }
 
     submit() {
-        if (!this.user.email || !this.user.password) {
-            this.alert("Please provide both an email address and password.");
+        if (!this.user.name) {
+            this.alert("Please provide a name.");
             return;
         }
 
@@ -95,7 +96,7 @@ export class LoginComponent {
     }
 
     focusPassword() {
-        this.password.nativeElement.focus();
+        this.name.nativeElement.focus();
     }
     focusConfirmPassword() {
         if (!this.isLoggingIn) {
