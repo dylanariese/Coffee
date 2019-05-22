@@ -11,24 +11,24 @@ export class DataService {
             src: "~/images/coffee/inline_image_preview.jpg",
             description: "Dylan Ariese - 24 Mei @ 14:00",
         },
-        // {
-        //     id: 2,
-        //     name: "Coffee afspraak twee",
-        //     src: "~/images/coffee/2822746_stock-photo-coffee.jpg",
-        //     description: "Roland Derks - 25 Mei @ 16:15",
-        // },
-        // {
-        //     id: 3,
-        //     name: "Coffee afspraak drie",
-        //     src: "~/images/coffee/coffee-geneva-switzerland.jpg",
-        //     description: "Joris Jolles - 26 Mei @ 11:30",
-        // },
-        // {
-        //     id: 4,
-        //     name: "Coffee afspraak vier",
-        //     src: "~/images/coffee/1.jpg",
-        //     description: "Joffrey Schoonheijm - 27 Mei @ 13:45",
-        // }
+        {
+            id: 2,
+            name: "Coffee afspraak twee",
+            src: "~/images/coffee/2822746_stock-photo-coffee.jpg",
+            description: "Roland Derks - 25 Mei @ 16:15",
+        },
+        {
+            id: 3,
+            name: "Coffee afspraak drie",
+            src: "~/images/coffee/coffee-geneva-switzerland.jpg",
+            description: "Joris Jolles - 26 Mei @ 11:30",
+        },
+        {
+            id: 4,
+            name: "Coffee afspraak vier",
+            src: "~/images/coffee/1.jpg",
+            description: "Joffrey Schoonheijm - 27 Mei @ 13:45",
+        }
     ];
     }
 
