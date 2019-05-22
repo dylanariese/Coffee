@@ -1,7 +1,9 @@
+
 <FlexboxLayout class="page">
     <StackLayout class="form">
         <Image class="logo" src="~/images/logo.png"></Image>
         <Label class="header" text="Coffee App"></Label>
+        <Label class="header" [text]="user.name"></Label>
 
         <PreviousNextView>
             <GridLayout rows="auto, auto, auto">
@@ -13,9 +15,8 @@
                     <StackLayout class="hr-light"></StackLayout>
                 </StackLayout>
 
-
                 <StackLayout row="1" class="input-field">
-                    <TextField #password class="input" [isEnabled]="!processing"
+                    <TextField #uuid class="input" [isEnabled]="!processing"
                         hint="UUID" [(ngModel)]="user.uuid"></TextField>
                     <StackLayout class="hr-light"></StackLayout>
                 </StackLayout>
@@ -24,7 +25,7 @@
             </GridLayout>
         </PreviousNextView>
 
-        <Button [text]="isLoggingIn ? 'Log In' : 'Sign Up'" [isEnabled]="!processing"
+        <Button [text]="'Next'" [isEnabled]="!processing"
             (tap)="submit()" class="btn btn-primary m-t-20"></Button>
     </StackLayout>
 

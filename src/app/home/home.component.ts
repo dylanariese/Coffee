@@ -10,9 +10,11 @@ import { UserService } from "../shared/user.service";
     selector: "Home",
     moduleId: module.id,
     templateUrl: "./home.component.html"
+
 })
 export class HomeComponent implements OnInit {
     items: Array<Item>;
+    userName: string = "hallo";
 
     @ViewChild("listView") listViewRef: ElementRef;
 
@@ -24,6 +26,7 @@ export class HomeComponent implements OnInit {
 
     ngOnInit(): void {
         this.items = this.dataService.getItems();
+        this.userName = this.userService.getUser().name;
     }
 
     toggleAccept(item: Item, accept: boolean) {
