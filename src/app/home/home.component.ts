@@ -64,9 +64,13 @@ export class HomeComponent implements OnInit {
         };
 
         this.items.push(item);
-        if(ios && this.items && this.items.length > 1){
+        if (ios && this.items && this.items.length > 1) {
             this.listViewRef.listView.scrollToIndex((this.items.length - 2), true);
         }
+    }
+
+    getUsers(item: Item) {
+        return this.items.filter(x => x.id === item.id)[0].users.map(x => `${x.name}`);
     }
 
     randomDate = (start: any, end: any) =>
