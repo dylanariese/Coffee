@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
 import { ListViewEventData } from "nativescript-ui-listview";
 
@@ -13,6 +13,8 @@ import { UserService } from "../shared/user.service";
 })
 export class HomeComponent implements OnInit {
     items: Array<Item>;
+
+    @ViewChild("listView") listViewRef: ElementRef;
 
     constructor(
         private routerExtensions: RouterExtensions,
@@ -54,6 +56,8 @@ export class HomeComponent implements OnInit {
         };
 
         this.items.push(item);
+
+        this.listViewRef.nativeElement.scrollToIndex((this.items.length - 1), true);
     }
 
     randomDate = (start: any, end: any) =>

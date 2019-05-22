@@ -1,8 +1,6 @@
 <ActionBar title="">
     <ActionItem (tap)="logout()" ios.systemIcon="19" ios.position="right" text="uitloggen" android.position="popup">
     </ActionItem>
-    <ActionItem (tap)="add()" ios.systemIcon="4" ios.position="right" text="toevoegen" android.position="popup">
-    </ActionItem>
 </ActionBar>
 
 <GridLayout orientation="vertical" width="100%" backgroundColor="white" tkExampleTitle tkToggleNavButton>
@@ -43,4 +41,9 @@
             </StackLayout>
         </ng-template>
     </RadListView>
+
+    <GridLayout rows="auto *" id="lt">
+        <Button id="bt" text="+" row="1" (tap)="add()"
+            style="clip-path: circle(48% at 50% 50%); font-size:12px; text-align:center; width:70px; height:70px; margin: 15; background-color: #ff4081; horizontal-align: right; vertical-align: bottom;"></Button>
+    </GridLayout>
 </GridLayout>
