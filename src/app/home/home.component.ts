@@ -6,6 +6,7 @@ import { RadListViewComponent } from "nativescript-ui-listview/angular/listview-
 import { Item } from "../data/item.model";
 import { DataService } from "../data/data";
 import { UserService } from "../shared/user.service";
+import { ios } from "tns-core-modules/application/application";
 
 @Component({
     selector: "Home",
@@ -63,7 +64,7 @@ export class HomeComponent implements OnInit {
         };
 
         this.items.push(item);
-        if(this.items && this.items.length > 1){
+        if(ios && this.items && this.items.length > 1){
             this.listViewRef.listView.scrollToIndex((this.items.length - 2), true);
         }
     }
