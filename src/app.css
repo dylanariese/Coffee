@@ -80,3 +80,12 @@ The imported CSS rules must precede all other types of rules.
     color: #e0e0e0;
     background-color: #e0e0e0;
 }
+
+.float-btn {
+    background-color:white;
+    border-radius: 28;
+    width:56;
+    height:56;
+    text-align: center;
+    margin: 20 20 0 0;
+}
