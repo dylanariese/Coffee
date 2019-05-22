@@ -5,11 +5,20 @@ import { Injectable } from "@angular/core";
 // import { Kinvey } from "kinvey-nativescript-sdk";
 import { User } from "./user.model";
 
-@Injectable()
+Injectable()
 export class UserService {
+    user:User;
+
     register(user: User) {
+
+        this.user = user;
         // return Kinvey.User.signup({ username: user.email, password: user.password })
         //     .catch(this.handleErrors);
+    }
+
+    getUser()
+    {
+        return this.user;
     }
 
     login(user: User) {

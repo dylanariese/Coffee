@@ -28,7 +28,8 @@ export class DataService {
             name: "Coffee afspraak vier",
             src: "~/images/coffee/1.jpg",
             description: "Joffrey Schoonheijm - 27 Mei @ 13:45",
-        }];
+        }
+    ];
     }
 
     getImages(): Array<string> {

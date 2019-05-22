@@ -1,5 +1,6 @@
 <ActionBar title="">
     <NavigationButton android.systemIcon="ic_menu_back" text="Terug" (tap)="logout()"></NavigationButton>
+    <ActionItem [text]="userName + ' wilt koffie'"></ActionItem>
 </ActionBar>
 
 <GridLayout orientation="vertical" width="100%" backgroundColor="white" tkExampleTitle tkToggleNavButton>
@@ -16,6 +17,7 @@
                         <GridLayout row="1" col="1" rows="auto" columns="auto,auto,auto">
                             <Label row="0" col="0" class="item-category" textwrap="true" verticalAlignment="top"
                                 horizontalAlignment="left" [text]="item.description"></Label>
+
                         </GridLayout>
                     </GridLayout>
 
