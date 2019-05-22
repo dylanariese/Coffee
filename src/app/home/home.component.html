@@ -1,6 +1,7 @@
 <ActionBar title="">
-    <NavigationButton android.systemIcon="ic_menu_back" text="Terug" (tap)="logout()"></NavigationButton>
-    <ActionItem [text]="userName + ' wilt koffie'"></ActionItem>
+    <NavigationButton android.systemIcon="ic_menu_back" text="Terug" (tap)="logout()" ></NavigationButton>
+    <ActionItem text="Back" (tap)="logout()" ios.position="left" visibility="{{ _ios ? 'visible' : 'collapse' }}"></ActionItem>
+    <ActionItem [text]="userName + ' wilt koffie'" ios.position="right"></ActionItem>
 </ActionBar>
 
 <GridLayout orientation="vertical" width="100%" backgroundColor="white" tkExampleTitle tkToggleNavButton>
