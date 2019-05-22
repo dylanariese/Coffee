@@ -67,13 +67,25 @@ export class HomeComponent implements OnInit {
         };
 
         this.items.push(item);
+
         if (ios && this.items && this.items.length > 1) {
             this.listViewRef.listView.scrollToIndex((this.items.length - 2), true);
+        }
+        else {
+            this.listViewRef.listView.scrollToIndex((this.items.length - 1), true);
         }
     }
 
     getUsers(item: Item) {
-        return this.items.filter(x => x.id === item.id)[0].users.map(x => `${x.name}`);
+        let users = this.items.filter(x => x.id === item.id)[0];
+
+        if (!users || !users.users) {
+            console.log('no users found!');
+
+            return;
+        }
+
+        return users.users.map(x => `${x.name}`);
     }
 
     randomDate = (start: any, end: any) =>
