@@ -18,8 +18,12 @@
                         <GridLayout row="1" col="1" rows="auto" columns="auto,auto,auto">
                             <Label row="0" col="0" class="item-category" textwrap="true" verticalAlignment="top"
                                 horizontalAlignment="left" [text]="item.description"></Label>
-
                         </GridLayout>
+                    </GridLayout>
+
+                    <GridLayout width="100%" columns="auto,*" rows="auto,auto" class="" verticalAlignment="center">
+                        <Label row="2" col="0" class="item-category" textwrap="true" verticalAlignment="top"
+                            horizontalAlignment="left" [text]="getUsers(item)"></Label>
                     </GridLayout>
 
                     <StackLayout width="100%" marginTop="5" class="line"></StackLayout>
