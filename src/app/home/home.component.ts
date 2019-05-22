@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
     }
 
     toggleAccept(item: Item, accept: boolean) {
+        console.log('item: ', item.name);
         console.log('accepted: ', accept);
     }
 
@@ -43,7 +44,6 @@ export class HomeComponent implements OnInit {
         const name = names[Math.floor(Math.random() * names.length)];
         const previous = this.items[this.items.length - 1];
         const next = ++previous.id;
-
         const dat = this.randomDate(new Date(2012, 0, 1), new Date());
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
             'September', 'October', 'November', 'December'];
@@ -56,19 +56,16 @@ export class HomeComponent implements OnInit {
         };
 
         this.items.push(item);
-
         this.listViewRef.nativeElement.scrollToIndex((this.items.length - 1), true);
     }
 
     randomDate = (start: any, end: any) =>
         new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 
-    onPullToRefreshInitiated = (args: ListViewEventData) => new Promise((resolve) =>
+    onPullToRefreshInitiated = (listView: ListViewEventData) => new Promise((resolve) =>
         resolve(this.dataService.getItems())).then((result: Array<Item>) => {
-            const listView = args.object;
-
             this.items = result;
 
-            listView.notifyPullToRefreshFinished(true);
+            listView.object.notifyPullToRefreshFinished(true);
         }).catch(error => console.log(error));
 }
