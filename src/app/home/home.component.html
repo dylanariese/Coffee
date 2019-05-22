@@ -33,7 +33,7 @@
                         </GridLayout>
 
                         <StackLayout col="3" orientation="horizontal" (tap)="toggleAccept(item, true)">
-                            <Label ref="" class="like-icon layout fa" text="&#xf045;"></Label>
+                            <Label class="like-icon layout fa" text="&#xf045;"></Label>
                             <Label class="layout" text="Accepteren"></Label>
                         </StackLayout>
                     </GridLayout>
@@ -44,8 +44,7 @@
         </ng-template>
     </RadListView>
 
-    <GridLayout rows="auto *" id="lt">
-        <Button id="bt" text="+" row="1" (tap)="add()"
-            style="clip-path: circle(48% at 50% 50%); font-size:12px; text-align:center; width:70px; height:70px; margin: 15; background-color: #ff4081; horizontal-align: right; vertical-align: bottom;"></Button>
-    </GridLayout>
+    <AbsoluteLayout horizontalAlignment="right" verticalAlignment="top">
+        <Button text="+" class="float-btn" (tap)="add()"></Button>
+    </AbsoluteLayout>
 </GridLayout>
