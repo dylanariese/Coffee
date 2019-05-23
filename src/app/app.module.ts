@@ -7,6 +7,7 @@ import { DataService } from "./data/data";
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { LoginComponent } from "./login/login.component";
 import { UserService } from "./shared/user.service";
+import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
 
 @NgModule({
     bootstrap: [
@@ -16,6 +17,7 @@ import { UserService } from "./shared/user.service";
         NativeScriptModule,
         AppRoutingModule,
         NativeScriptFormsModule,
+        NativeScriptHttpClientModule,
     ],
     providers: [
         DataService,

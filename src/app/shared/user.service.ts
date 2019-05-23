@@ -4,11 +4,23 @@
 import { Injectable } from "@angular/core";
 // import { Kinvey } from "kinvey-nativescript-sdk";
 import { User } from "./user.model";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
 
-Injectable()
+@Injectable()
 export class UserService {
     user:User;
+    private serverUrl = "http://localhost:50764/api/users";
+    //private serverUrl = "https://httpbin.org/get";
 
+    constructor(private http: HttpClient) { }
+
+    getData() {
+        // let headers = this.createRequestHeader();
+        return this.http.get(this.serverUrl);
+    }
+
+    
     register(user: User) {
 
         this.user = user;
@@ -19,6 +31,10 @@ export class UserService {
     getUser()
     {
         return this.user;
+    }
+
+    getUsers(){
+        return null;
     }
 
     login(user: User) {
