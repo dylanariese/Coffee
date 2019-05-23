@@ -2,11 +2,12 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
 import { ListViewEventData } from "nativescript-ui-listview";
 import { RadListViewComponent } from "nativescript-ui-listview/angular/listview-directives";
+import * as dialogs from "tns-core-modules/ui/dialogs";
 
 import { Item } from "../shared/item.model";
 import { DataService } from "../data/data";
 import { UserService } from "../shared/user.service";
-import { ios } from "tns-core-modules/application/application";
+import { ios, iOSApplication } from "tns-core-modules/application/application";
 
 @Component({
     selector: "Home",
@@ -16,7 +17,7 @@ import { ios } from "tns-core-modules/application/application";
 export class HomeComponent implements OnInit {
     items: Array<Item>;
     userName: string = "hallo";
-    _ios;
+    _ios: iOSApplication;
 
     @ViewChild("listView") listViewRef: RadListViewComponent;
 
@@ -27,18 +28,28 @@ export class HomeComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        console.log('calling init');
         this.items = this.dataService.getItems();
         var user = this.userService.getUser();
         this.userName = user ? this.userService.getUser().name : "Anoniem";
         this._ios = ios;
-        console.log('user ', this.userName);
     }
 
     toggleAccept(item: Item, accept: boolean) {
-        item.status = accept;
-
         const user = this.userService.getUser();
+
+        if (!user) {
+            dialogs.alert({
+                title: "Foutmelding",
+                message: "U bent niet ingelogd en wordt doorverwezen naar de inlog pagina",
+                okButtonText: "Ok"
+            }).then(() => {
+                this.logout();
+            });
+
+            return;
+        }
+
+        this.toggleStatus(item);
 
         if (accept) {
             if (item.users.some(x => x.name === user.name)) {
@@ -56,6 +67,9 @@ export class HomeComponent implements OnInit {
             item.users.splice(idx, 1);
         }
     }
+
+    toggleStatus = (item: Item) =>
+        item.status = !item.status;
 
     logout() {
         this.userService.logout();

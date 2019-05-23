@@ -13,7 +13,8 @@ export class DataService {
             description: "Dylan Ariese - 24 Mei @ 14:00",
             users: [
                 { name: 'Joffrey' },
-                { name: 'Roland' }
+                { name: 'Roland' },
+                { name: 'Jan Jansen' }
             ],
             status: true
         },
@@ -36,7 +37,7 @@ export class DataService {
             users: [
                 { name: 'Bas' },
                 { name: 'Joffrey' },
-                { name: 'Dylan' }
+                { name: 'Jan Jansen' }
             ],
             status: true
         },
@@ -70,16 +71,7 @@ export class DataService {
         ];
 
         return images;
-    }
-
-    getUsers(): Array<User> {
-        const users = [
-            { name: 'dylan' },
-            { name: 'dylan' },
-        ];
-
-        return users;
-    }
+    } 
 
     getNames(): Array<string> {
         const images = [
