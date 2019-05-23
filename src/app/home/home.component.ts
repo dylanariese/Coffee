@@ -8,6 +8,7 @@ import { Item } from "../shared/item.model";
 import { DataService } from "../data/data";
 import { UserService } from "../shared/user.service";
 import { ios, iOSApplication } from "tns-core-modules/application/application";
+import { User } from "../shared/user.model";
 
 @Component({
     selector: "Home",
@@ -16,8 +17,9 @@ import { ios, iOSApplication } from "tns-core-modules/application/application";
 })
 export class HomeComponent implements OnInit {
     items: Array<Item>;
-    userName: string = "hallo";
+    username: string = "hallo";
     _ios: iOSApplication;
+    dialog = false;
 
     @ViewChild("listView") listViewRef: RadListViewComponent;
 
@@ -30,7 +32,7 @@ export class HomeComponent implements OnInit {
     ngOnInit(): void {
         this.items = this.dataService.getItems();
         var user = this.userService.getUser();
-        this.userName = user ? this.userService.getUser().name : "Anoniem";
+        this.username = user ? this.userService.getUser().name : "Anoniem";
         this._ios = ios;
     }
 
@@ -77,9 +79,12 @@ export class HomeComponent implements OnInit {
         this.routerExtensions.navigate(["/login"], { clearHistory: true });
     }
 
+    toggleDialog = () =>
+        this.dialog = !this.dialog;
+
     add() {
         const urls = this.dataService.getImages();
-        const names = this.dataService.getNames();
+        const names = this.dataService.getNames().filter(name => name !== this.username);
         const image = urls[Math.floor(Math.random() * urls.length)];
         const name = names[Math.floor(Math.random() * names.length)];
         const previous = this.items[this.items.length - 1];
@@ -90,9 +95,13 @@ export class HomeComponent implements OnInit {
 
         let item = <Item>{
             id: next,
-            name: `Coffee afspraak ${next}`,
+            name: `Coffee afspraak ${name}`,
             src: image,
-            description: `${name} - ${dat.getDay() + 1} ${months[dat.getMonth()]} @ ${dat.getHours()}:${dat.getMinutes()}`,
+            description: `${dat.getDay() + 1} ${months[dat.getMonth()]} om ${dat.getHours()}:${dat.getMinutes()}`,
+            users: [
+                <User>{ name: names[Math.floor(Math.random() * names.length)] },
+                <User>{ name: names[Math.floor(Math.random() * names.length)] }
+            ]
         };
 
         this.items.push(item);
@@ -108,15 +117,13 @@ export class HomeComponent implements OnInit {
     }
 
     getUsers(item: Item) {
-        let users = this.items.filter(x => x.id === item.id)[0];
-
-        if (!users || !users.users) {
+        if (!item.users) {
             console.log('no users found!');
 
             return;
         }
 
-        return users.users.map(x => `${x.name}`);
+        return item.users.map(x => `${x.name}`);
     }
 
     randomDate = (start: any, end: any) =>

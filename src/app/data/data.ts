@@ -8,9 +8,9 @@ export class DataService {
     getItems(): Array<Item> {
         return [{
             id: 1,
-            name: "Coffee afspraak één",
+            name: "Coffee afspraak Dylan",
             src: "~/images/coffee/inline_image_preview.jpg",
-            description: "Dylan Ariese - 24 Mei @ 14:00",
+            description: "24 Mei om 14:00",
             users: [
                 { name: 'Joffrey' },
                 { name: 'Roland' },
@@ -20,9 +20,9 @@ export class DataService {
         },
         {
             id: 2,
-            name: "Coffee afspraak twee",
+            name: "Coffee afspraak Roland",
             src: "~/images/coffee/2822746_stock-photo-coffee.jpg",
-            description: "Roland Derks - 25 Mei @ 16:15",
+            description: "25 Mei om 16:15",
             users: [
                 { name: 'Joris' },
                 { name: 'Bas' }
@@ -31,9 +31,9 @@ export class DataService {
         },
         {
             id: 3,
-            name: "Coffee afspraak drie",
+            name: "Coffee afspraak Joris",
             src: "~/images/coffee/coffee-geneva-switzerland.jpg",
-            description: "Joris Jolles - 26 Mei @ 11:30",
+            description: "26 Mei om 11:30",
             users: [
                 { name: 'Bas' },
                 { name: 'Joffrey' },
@@ -43,9 +43,9 @@ export class DataService {
         },
         {
             id: 4,
-            name: "Coffee afspraak vier",
+            name: "Coffee afspraak Joffrey",
             src: "~/images/coffee/1.jpg",
-            description: "Joffrey Schoonheijm - 27 Mei @ 13:45",
+            description: "27 Mei om 13:45",
             users: [
                 { name: 'Roland' },
                 { name: 'Joris' }
@@ -71,10 +71,10 @@ export class DataService {
         ];
 
         return images;
-    } 
+    }
 
     getNames(): Array<string> {
-        const images = [
+        const names = [
             "Dylan Ariese",
             "Joffrey Schoonheijn",
             "Roland Derks",
@@ -88,6 +88,6 @@ export class DataService {
             "Gert de Best"
         ];
 
-        return images;
+        return names;
     }
 }
