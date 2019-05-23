@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
         if (!user) {
             dialogs.alert({
                 title: "Foutmelding",
-                message: "U bent niet ingelogd en wordt doorverwezen naar de inlog pagina",
+                message: "U bent niet ingelogd en wordt doorverwezen naar de inlog pagina.",
                 okButtonText: "Ok"
             }).then(() => {
                 this.logout();
