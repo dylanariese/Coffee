@@ -97,8 +97,10 @@ export class HomeComponent implements OnInit {
 
         this.items.push(item);
 
-        if (ios && this.items && this.items.length > 1) {
-            this.listViewRef.listView.scrollToIndex((this.items.length - 2), true);
+        if (ios) {
+            setTimeout(() => {
+                this.listViewRef.listView.scrollToIndex(this.items.length - 1, true);
+            }, 100);
         }
         else {
             this.listViewRef.listView.scrollToIndex((this.items.length - 1), true);
