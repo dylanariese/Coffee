@@ -89,3 +89,11 @@ The imported CSS rules must precede all other types of rules.
     text-align: center;
     margin: 20 20 0 0;
 }
+
+.accepted {
+    color:#00FF00;    
+}
+
+.declined {
+    color:red;
+}

@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
 import { ListViewEventData } from "nativescript-ui-listview";
 import { RadListViewComponent } from "nativescript-ui-listview/angular/listview-directives";
 
-import { Item } from "../data/item.model";
+import { Item } from "../shared/item.model";
 import { DataService } from "../data/data";
 import { UserService } from "../shared/user.service";
 import { ios } from "tns-core-modules/application/application";
@@ -12,8 +12,6 @@ import { ios } from "tns-core-modules/application/application";
     selector: "Home",
     moduleId: module.id,
     templateUrl: "./home.component.html"
-
-
 })
 export class HomeComponent implements OnInit {
     items: Array<Item>;
@@ -38,8 +36,25 @@ export class HomeComponent implements OnInit {
     }
 
     toggleAccept(item: Item, accept: boolean) {
-        console.log('item: ', item.name);
-        console.log('accepted: ', accept);
+        item.status = accept;
+
+        const user = this.userService.getUser();
+
+        if (accept) {
+            if (item.users.some(x => x.name === user.name)) {
+                return;
+            }
+
+            item.users.push(user);
+        } else {
+            const idx = item.users.findIndex(x => x.name === user.name);
+
+            if (idx === -1) {
+                return;
+            }
+
+            item.users.splice(idx, 1);
+        }
     }
 
     logout() {
