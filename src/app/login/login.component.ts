@@ -28,7 +28,7 @@ export class LoginComponent {
     constructor(private page: Page, private routerExtensions: RouterExtensions, private userService: UserService) {
         this.page.actionBarHidden = true;
         this.user = new User();
-        this.user.name  = "Jan Jansen";
+        this.user.name  = "";
         this.user.uuid = device.uuid;
     }
 
