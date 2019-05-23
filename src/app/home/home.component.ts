@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
     ngOnInit(): void {
         console.log('calling init');
         this.items = this.dataService.getItems();
-        var user = this.userService.getUser()
+        var user = this.userService.getUser();
         this.userName = user ? this.userService.getUser().name : "Anoniem";
         this._ios = ios;
         console.log('user ', this.userName);

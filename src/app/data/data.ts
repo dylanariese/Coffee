@@ -44,8 +44,7 @@ export class DataService {
                 { name: 'Roland' },
                 { name: 'Joris', }
             ]
-        }
-        ];
+        }];
     }
 
     getImages(): Array<string> {
