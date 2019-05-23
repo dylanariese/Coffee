@@ -20,6 +20,11 @@ export class LoginComponent {
     @ViewChild("name") name: ElementRef;
     @ViewChild("confirmPassword") confirmPassword: ElementRef;
 
+    public host: string;
+    public userAgent: string;
+    public origin: string;
+    public url: string;
+
     constructor(private page: Page, private routerExtensions: RouterExtensions, private userService: UserService) {
         this.page.actionBarHidden = true;
         this.user = new User();
@@ -53,7 +58,15 @@ export class LoginComponent {
         //         this.processing = false;
         //         this.alert("Unfortunately we could not find your account.");
         //     });
-        this.routerExtensions.navigate(["/home"], { clearHistory: true });
+        // this.routerExtensions.navigate(["/home"], { clearHistory: true });
+
+    }
+
+    private onGetDataSuccess(res) {
+        this.host = res.headers.Host;
+        this.userAgent = res.headers["User-Agent"];
+        this.origin = res.origin;
+        this.url = res.url;
     }
 
     register() {
@@ -72,6 +85,14 @@ export class LoginComponent {
             //     this.alert("Unfortunately we were unable to create your account.");
             // });
         this.routerExtensions.navigate(["/home"], { clearHistory: true });
+
+        // this.userService.getData()
+        // .subscribe((result) => {
+        //     this.onGetDataSuccess(result);
+        //     console.log(result);
+        // }, (error) => {
+        //     console.log(error);
+        // });
     }
 
 
