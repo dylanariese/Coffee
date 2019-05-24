@@ -1,12 +1,11 @@
 import { Injectable } from "@angular/core";
 
-import { Item } from "../shared/item.model";
-import { User } from "../shared/user.model";
+import { Item } from "./models/item.model";
 
 @Injectable()
 export class DataService {
     getItems(): Array<Item> {
-        return [{
+        const items = [{
             id: 1,
             name: "Coffee afspraak Dylan",
             src: "~/images/coffee/inline_image_preview.jpg",
@@ -14,9 +13,9 @@ export class DataService {
             users: [
                 { name: 'Joffrey' },
                 { name: 'Roland' },
-                { name: 'Jan Jansen' }
+                { name: 'Dylan' }
             ],
-            status: true
+            status: false
         },
         {
             id: 2,
@@ -37,9 +36,9 @@ export class DataService {
             users: [
                 { name: 'Bas' },
                 { name: 'Joffrey' },
-                { name: 'Jan Jansen' }
+                { name: 'Dylan' }
             ],
-            status: true
+            status: false
         },
         {
             id: 4,
@@ -52,6 +51,8 @@ export class DataService {
             ],
             status: false
         }];
+
+        return items;
     }
 
     getImages(): Array<string> {
@@ -75,17 +76,17 @@ export class DataService {
 
     getNames(): Array<string> {
         const names = [
-            "Dylan Ariese",
-            "Joffrey Schoonheijn",
-            "Roland Derks",
-            "Joris Jolles",
-            "Henk op 't Einde",
-            "Stefan Koldewijn",
-            "Manon Zorge",
-            "Rudi Boer",
-            "Bas Goedhart",
-            "Saskia Brand",
-            "Gert de Best"
+            "Dylan",
+            "Joffrey",
+            "Roland",
+            "Joris",
+            "Henk",
+            "Stefan",
+            "Manon",
+            "Rudi",
+            "Bas",
+            "Saskia",
+            "Gert"
         ];
 
         return names;

@@ -1,11 +1,11 @@
 import { Component, ElementRef, ViewChild } from "@angular/core";
-import { alert, prompt } from "tns-core-modules/ui/dialogs";
+import { alert } from "tns-core-modules/ui/dialogs";
 import { Page } from "tns-core-modules/ui/page";
-import { RouterExtensions } from "nativescript-angular/router";
-import { User } from "../shared/user.model";
 import { device } from "tns-core-modules/platform/platform";
-import { UserService } from "../shared/user.service";
+import { RouterExtensions } from "nativescript-angular/router";
 
+import { User } from "../shared/models/user.model";
+import { UserService } from "../shared/user.service";
 
 @Component({
     selector: "app-login",
@@ -15,26 +15,24 @@ import { UserService } from "../shared/user.service";
 })
 export class LoginComponent {
     isLoggingIn = true;
-    user: User;
     processing = false;
+    user: User;
+
     @ViewChild("name") name: ElementRef;
     @ViewChild("confirmPassword") confirmPassword: ElementRef;
 
-    public host: string;
-    public userAgent: string;
-    public origin: string;
-    public url: string;
-
     constructor(private page: Page, private routerExtensions: RouterExtensions, private userService: UserService) {
         this.page.actionBarHidden = true;
+
         this.user = new User();
-        this.user.name  = "";
+        this.user.name = "";
         this.user.uuid = device.uuid;
     }
 
     submit() {
         if (!this.user.name) {
             this.alert("Please provide a name.");
+
             return;
         }
 
@@ -62,28 +60,21 @@ export class LoginComponent {
 
     }
 
-    private onGetDataSuccess(res) {
-        this.host = res.headers.Host;
-        this.userAgent = res.headers["User-Agent"];
-        this.origin = res.origin;
-        this.url = res.url;
-    }
-
     register() {
         // if (this.user.password != this.user.confirmPassword) {
         //     this.alert("Your passwords do not match.");
         //     return;
         // }
         this.userService.register(this.user)
-            // .then(() => {
-            //     this.processing = false;
-            //     this.alert("Your account was successfully created.");
-            //     this.isLoggingIn = true;
-            // })
-            // .catch(() => {
-            //     this.processing = false;
-            //     this.alert("Unfortunately we were unable to create your account.");
-            // });
+        // .then(() => {
+        //     this.processing = false;
+        //     this.alert("Your account was successfully created.");
+        //     this.isLoggingIn = true;
+        // })
+        // .catch(() => {
+        //     this.processing = false;
+        //     this.alert("Unfortunately we were unable to create your account.");
+        // });
         this.routerExtensions.navigate(["/home"], { clearHistory: true });
 
         // this.userService.getData()

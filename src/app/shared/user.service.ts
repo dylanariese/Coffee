@@ -3,7 +3,7 @@
 
 import { Injectable } from "@angular/core";
 // import { Kinvey } from "kinvey-nativescript-sdk";
-import { User } from "./user.model";
+import { User } from "./models/user.model";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
 

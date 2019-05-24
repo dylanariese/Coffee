@@ -3,7 +3,7 @@ import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { DataService } from "./data/data";
+import { DataService } from "./shared/data.service";
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { LoginComponent } from "./login/login.component";
 import { UserService } from "./shared/user.service";

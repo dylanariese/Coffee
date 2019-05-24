@@ -1,14 +1,14 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, NgZone } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
 import { ListViewEventData } from "nativescript-ui-listview";
 import { RadListViewComponent } from "nativescript-ui-listview/angular/listview-directives";
+import { ios, iOSApplication } from "tns-core-modules/application/application";
 import * as dialogs from "tns-core-modules/ui/dialogs";
 
-import { Item } from "../shared/item.model";
-import { DataService } from "../data/data";
+import { Item } from "../shared/models/item.model";
+import { DataService } from "../shared/data.service";
 import { UserService } from "../shared/user.service";
-import { ios, iOSApplication } from "tns-core-modules/application/application";
-import { User } from "../shared/user.model";
+import { User } from "../shared/models/user.model";
 
 @Component({
     selector: "Home",
@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit {
     items: Array<Item>;
     username: string = "hallo";
     _ios: iOSApplication;
-    dialog = false;
 
     @ViewChild("listView") listViewRef: RadListViewComponent;
 
@@ -30,10 +29,18 @@ export class HomeComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.items = this.dataService.getItems();
         var user = this.userService.getUser();
         this.username = user ? this.userService.getUser().name : "Anoniem";
         this._ios = ios;
+        this.items = this.dataService.getItems();
+
+        this.setAppointments();
+    }
+
+    setAppointments() {
+        this.items.forEach(item => {
+            item.status = item.users.some(x => x.name === this.username);
+        });
     }
 
     toggleAccept(item: Item, accept: boolean) {
@@ -51,8 +58,6 @@ export class HomeComponent implements OnInit {
             return;
         }
 
-        this.toggleStatus(item);
-
         if (accept) {
             if (item.users.some(x => x.name === user.name)) {
                 return;
@@ -68,6 +73,8 @@ export class HomeComponent implements OnInit {
 
             item.users.splice(idx, 1);
         }
+
+        this.toggleStatus(item);
     }
 
     toggleStatus = (item: Item) =>
@@ -78,9 +85,6 @@ export class HomeComponent implements OnInit {
 
         this.routerExtensions.navigate(["/login"], { clearHistory: true });
     }
-
-    toggleDialog = () =>
-        this.dialog = !this.dialog;
 
     add() {
         const urls = this.dataService.getImages();
@@ -106,14 +110,9 @@ export class HomeComponent implements OnInit {
 
         this.items.push(item);
 
-        if (ios) {
-            setTimeout(() => {
-                this.listViewRef.listView.scrollToIndex(this.items.length - 1, true);
-            }, 100);
-        }
-        else {
-            this.listViewRef.listView.scrollToIndex((this.items.length - 1), true);
-        }
+        setTimeout(() => {
+            this.listViewRef.listView.scrollToIndex(this.items.length - 1, true);
+        }, 100);
     }
 
     getUsers(item: Item) {
@@ -123,7 +122,7 @@ export class HomeComponent implements OnInit {
             return;
         }
 
-        return item.users.map(x => `${x.name}`);
+        return item.users.map(x => x.name);
     }
 
     randomDate = (start: any, end: any) =>
@@ -132,6 +131,8 @@ export class HomeComponent implements OnInit {
     onPullToRefreshInitiated = (listView: ListViewEventData) => new Promise((resolve) =>
         resolve(this.dataService.getItems())).then((result: Array<Item>) => {
             this.items = result;
+
+            this.setAppointments();
 
             listView.object.notifyPullToRefreshFinished(true);
         }).catch(error => console.log(error));
